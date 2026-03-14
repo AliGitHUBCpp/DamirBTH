@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .progress-container { background: rgba(255,255,255,0.1); border-radius: 10px; height: 12px; margin: 20px 0; overflow: hidden; }
+        .bar { height: 100%; width: 0; background: #ffcc00; transition: 0.5s; box-shadow: 0 0 15px #ffcc00; }
+        .answer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
+        .answer { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 15px; border-radius: 12px; cursor: pointer; transition: 0.3s; font-weight: bold; }
+        .answer:hover { background: rgba(255,255,255,0.25); transform: scale(1.02); }
+        .correct { background: #2ecc71 !important; }
+        .wrong { background: #e74c3c !important; animation: shake 0.4s; }
+        @keyframes shake { 0%, 100% {transform: translateX(0);} 25% {transform: translateX(-10px);} 75% {transform: translateX(10px);} }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2 id="q-counter" style="color: #ffcc00; font-size: 1rem;">Вопрос 1 из 15</h2>
+        <div class="progress-container"><div class="bar" id="bar"></div></div>
+        <h2 id="question-text" style="min-height: 60px;">Загрузка...</h2>
+        <div class="answer-grid" id="answers"></div>
+    </div>
+
+    <script>
+        const questions = [
+            {q:"Любимый футбольный клуб?", a:["Barcelona","Real Madrid","Milan","PSG"], c:0},
+            {q:"Автор книги 'Kafka on the Shore'?", a:["Haruki Murakami","Orwell","King","Tolstoy"], c:0},
+            {q:"Сколько игроков в основной команде CS2?", a:["4","5","6","7"], c:1},
+            {q:"Какая граната тушит Molotov?", a:["Flash","Smoke","HE","Decoy"], c:1},
+            {q:"Максимум денег в CS2?", a:["10000","16000","20000","12000"], c:1},
+            {q:"Первая игра в Dota 2 была на каком герое?", a:["Sven","Axe","Pudge","Juggernaut"], c:0},
+            {q:"Как называется ультимейт Sven?", a:["Storm Hammer","Warcry","God Strength","Slash"], c:2},
+            {q:"Сколько игроков в одной команде Dota?", a:["4","5","6","7"], c:1},
+            {q:"Жанр Dota 2?", a:["MOBA","FPS","RPG","RTS"], c:0},
+            {q:"Как называется домашний стадион Barcelona?", a:["Camp Nou","San Siro","Old Trafford","Bernabeu"], c:0},
+            {q:"Девиз Барселоны?", a:["More than a club","Never lose","Play forever","Champions"], c:0},
+            {q:"Самая легендарная карта в CS?", a:["Dust2","Forest","City","Base"], c:0},
+            {q:"Макс. раундов в матче CS2 (без овертаймов)?", a:["24","26","30","32"], c:0},
+            {q:"Кто сегодня главный именинник?", a:["Дамир","Али","Тамер","Демир"], c:0},
+            {q:"Готов забить решающий гол?", a:["ДА!","Не знаю","Позже","Нет"], c:0}
+        ];
+
+        let i = 0;
+        function render() {
+            const q = questions[i];
+            document.getElementById("q-counter").innerText = `Вопрос ${i + 1} из ${questions.length}`;
+            document.getElementById("bar").style.width = `${(i / questions.length) * 100}%`;
+            document.getElementById("question-text").innerText = q.q;
+            const container = document.getElementById("answers");
+            container.innerHTML = '';
+            q.a.forEach((ans, idx) => {
+                const btn = document.createElement('div');
+                btn.className = 'answer';
+                btn.innerText = ans;
+                btn.onclick = () => {
+                    if(idx === q.c) {
+                        btn.classList.add('correct');
+                        setTimeout(() => {
+                            i++;
+                            if(i < questions.length) render();
+                            else finish();
+                        }, 400);
+                    } else {
+                        btn.classList.add('wrong');
+                        setTimeout(() => btn.classList.remove('wrong'), 500);
+                    }
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        function finish() {
+            location.href = "game.html";
+        }
+        render();
+    </script>
+</body>
+</html>

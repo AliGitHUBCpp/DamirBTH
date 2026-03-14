@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>football</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .stadium { 
+            position: relative; 
+            height: 350px; 
+            background: linear-gradient(#27ae60, #2ecc71); 
+            border-radius: 20px; 
+            margin: 20px 0; 
+            border: 4px solid white;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.2);
+        }
+        .goal { 
+            position: absolute; top: 20px; left: 50%; transform: translateX(-50%); 
+            width: 250px; height: 120px; border: 5px solid white; border-bottom: none;
+        }
+        .ball { 
+            font-size: 50px; position: absolute; bottom: 30px; left: 50%; 
+            transform: translateX(-50%); cursor: pointer; transition: 0.6s cubic-bezier(0.5, -0.5, 0.5, 1.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Решающий удар ⚽</h1>
+        <p>Дамир, один точный удар — и приз твой!</p>
+        <div class="stadium">
+            <div class="goal"></div>
+            <div id="ball" class="ball" onclick="kick()">⚽</div>
+        </div>
+        <h2 id="result"></h2>
+    </div>
+
+    <script>
+        function kick() {
+            const ball = document.getElementById('ball');
+            ball.style.bottom = '230px';
+            ball.style.transform = 'translateX(-50%) scale(0.4) rotate(720deg)';
+            
+            setTimeout(() => {
+                document.getElementById('result').innerText = "ГОООООООЛ!!! 🏆";
+                setTimeout(() => location.href = "final.html", 1200);
+            }, 600);
+        }
+    </script>
+</body>
+</html>

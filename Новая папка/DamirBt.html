@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>HB Damir | Main</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Стиль для модального окна фото */
+        #photo-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); display: none; justify-content: center;
+            align-items: center; z-index: 1000; cursor: zoom-out;
+            backdrop-filter: blur(10px); animation: fadeIn 0.3s;
+        }
+        #photo-overlay img { max-width: 90%; max-height: 90%; border-radius: 10px; box-shadow: 0 0 30px var(--primary); }
+    </style>
+</head>
+<body>
+    <iframe src="https://www.youtube.com/embed/5qap5aO4i9A?autoplay=1&loop=1&playlist=5qap5aO4i9A" allow="autoplay" style="display:none"></iframe>
+
+    <div class="card">
+        <h1>С Днём Рождения, Дамир! 👑</h1>
+        <p>Салам,Дамир.Нажми на фото, чтобы рассмотреть, или начни квест.</p>
+        
+        <div class="gallery">
+            <img src="photos1.jpg" onclick="openPhoto(this.src)">
+            <img src="photos2.jpg" onclick="openPhoto(this.src)">
+            <img src="photos3.jpg" onclick="openPhoto(this.src)">
+            <img src="photos4.jpg" onclick="openPhoto(this.src)">
+        </div>
+
+        <button onclick="location.href='quiz.html'">РЕГАЙ УЖЕ</button>
+    </div>
+
+    <div id="photo-overlay" onclick="this.style.display='none'">
+        <img id="full-img" src="">
+    </div>
+
+    <script>
+        function openPhoto(src) {
+            document.getElementById('full-img').src = src;
+            document.getElementById('photo-overlay').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Реакция</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>Нажми когда экран станет зелёным</h1>
+
+<div id="box" style="width:200px;height:200px;background:red;margin:auto"></div>
+
+<script>
+
+let box=document.getElementById("box")
+
+setTimeout(()=>{
+
+box.style.background="green"
+
+box.onclick=function(){
+
+alert("Отличная реакция!")
+
+location.href="final.html"
+
+}
+
+},Math.random()*4000)
+
+</script>
+
+</body>
+</html>
